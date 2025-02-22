@@ -2,9 +2,7 @@ package com.consumption.crud.models;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,26 +15,27 @@ public class AlunoModel {
     @GeneratedValue(strategy = GenerationType.AUTO) //parar gerar o id automativamente
     private Integer id;
 
-    @Column(nullable = false)
-    @NotNull (message = "Erro: O Sobrenome não pode estar em branco")
-    private String nomeAluno;
-
-    @Column(nullable = false)
-    @NotNull (message = "Erro: O Sobrenome não pode estar em branco")
-    private String sobrenomeAluno;
-
-    @Column(nullable = false)
-    @Email(message = "Erro: O e-mail deve ser válido")
-    @NotNull (message = "Erro: O Sobrenome não pode estar em branco")
-    private String email;
-
-    @Column(nullable = false, unique = true)
-    @NotNull (message = "Erro: O Sobrenome não pode estar em branco")
-    @Size(min = 11, max = 11, message = "Erro: O CPF deve ter exatamente 11 dígitos")
+    @NotNull (message = "Erro: O CPF é obrigatório. Não pode ser nulo")
+    @Size(min = 11, max = 11, message = "O CPF deve ter exatamente 11 caracteres.")
+    @Column(nullable = false, unique = true, length = 11)
     private String cpf;
 
-    @Column(nullable = false, unique = true)
-    @NotNull (message = "Erro: O Sobrenome não pode estar em branco")
-    @Size(min = 6, max = 14, message = "Erro: O RG precisa ter no min 6 e no maximo 14 caracteres")
+    @NotNull (message = "Erro: O Nome é obrigatório. Não pode ser nulo")
+    @Column(nullable = false)
+    private String nomeAluno;
+
+    @NotNull (message = "Erro: O Sobrenome é obrigatório. Não pode ser nulo")
+    @Size(min = 2, max = 100, message = "O nome deve ter entre 2 e 100 caracteres.")
+    @Column(nullable = false)
+    private String sobrenomeAluno;
+
+    @NotNull (message = "Erro: O Email é obrigatório. Não pode ser nulo")
+    @Email(message = "Erro: O e-mail deve ser válido")
+    @Column(nullable = false)
+    private String email;
+
+    @NotNull (message = "Erro: O RG é obrigatório. Não pode ser nulo")
+    @Size(min = 8, max = 11, message = "O RG deve ter no min 8 e no maximo 11 caracteres.")
+    @Column(nullable = false, unique = true, length = 11)
     private String rg;
 }

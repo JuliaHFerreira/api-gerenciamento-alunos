@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,13 +26,13 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<AlunoModel> postAluno(@RequestBody @Valid AlunoModel alunoModel){
+    public ResponseEntity<AlunoModel> postAluno(@Valid @RequestBody AlunoModel alunoModel){
         alunoModel.setId(null);
         return new ResponseEntity<>(alunoService.salvarAluno(alunoModel), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AlunoModel> putAluno(@PathVariable Integer id, @RequestBody @Valid AlunoModel alunoModel) {
+    public ResponseEntity<AlunoModel> putAluno(@PathVariable Integer id, @Valid @RequestBody AlunoModel alunoModel) {
         alunoModel.setId(id);
         return ResponseEntity.ok(alunoService.salvarAluno(alunoModel));
     }
